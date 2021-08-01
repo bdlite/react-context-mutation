@@ -1,15 +1,15 @@
 {
   "name": "react-context-mutation",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "to replace redux,Provider value contain useActions which is to merge context state value and useActions return an immutable function collection called `actions`",
-  "main": "src/index.js",
+  "main": "es/index.js",
   "scripts": {
     "clean": "rimraf es",
     "tsc": "tsc --project tsconfig.json",
     "transpile": "cross-env BABEL_ENV=es babel src -d es",
     "build": "npm run clean && npm run tsc && npm run transpile",
     "test": "cross-env BABEL_ENV=test && jest --coverage --config jest.config.js",
-    "prepublishOnly": "npm run test && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "es"
@@ -21,10 +21,15 @@
   "lint-staged": {
     "src/*.js": "eslint"
   },
+  "author": {
+    "name": "cloudfly",
+    "email": "cloudflypeng@gmail.com"
+  },
   "contributors": [
     "Shirley Xie",
     "Cloudfly Peng"
   ],
+  "keywords": ["react", "reactjs", "context", "mutable", "mutation"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bdlite/react-context-mutation/issues"
@@ -35,8 +40,7 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "react": "^17.0.2"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/cli": "7.11.6",
