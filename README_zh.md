@@ -20,9 +20,20 @@ npm install react-context-mutation
 # 使用
 
 ```js
-// App.js
-import { AppConsumer, AppProvider } = from 'react-context-mutation'
-import Header from './header';
+// ./App/context.js
+import createAppContext from 'react-context-mutation';
+import state from './state'; // 默认初始state树
+import configReducer from './config-reducer'; // 预置config合并函数
+
+export default createAppContext(state, configReducer)
+```
+
+```js
+// ./App/index.js
+import AppContext from './context'
+import Header from './header'
+
+const { AppProvider, AppConsumer } = AppContext
 
 export default function App() {
   return (
@@ -45,7 +56,7 @@ export default function App() {
 ```
 
 ```js
-// ./header/index.js
+// ./Header/index.js
 import createActions from './actions';
 
 export default function Header(props) {
@@ -66,7 +77,7 @@ export default function Header(props) {
 ```
 
 ```js
-// ./header/actions.js
+// ./Header/actions.js
 export default (mutation, contextRef) => ({
   changeCurrent(currentItem) {
     // 你可以在这里请求数据，异步处理context值
