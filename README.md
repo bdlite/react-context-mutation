@@ -92,7 +92,7 @@ export default function Header(props) {
 ```
 ```js
 // ./Header/actions.js
-export default (mutation, contextRef) => ({
+export default (mutation, contextRef) => ({ // `mutation`and`contextRef` from closure
   changeCurrent(currentItem) {
     // you can fetch data hear
     mutation.header(() => ({ currentItem }));
