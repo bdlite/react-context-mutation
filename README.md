@@ -104,7 +104,7 @@ export default (mutation, contextRef) => ({ // `mutation`and`contextRef` from cl
 
 
 # AppProvider
-The provider receives a config attribute and passes it to the consumer component. A provider can have corresponding relationships with multiple consumer components. Multiple providers can also be nested, and the data in the inner layer will cover the data in the outer layer.
+The provider receives a config attribute and make the custom config merge to the abstraction of business framework.
 
 ```
 <AppProvider config={/* initial config inner state */}>...</AppProvider>
