@@ -5,7 +5,7 @@ English | [中文](README_zh.md)
 
 # NOTE
 
-React-context-mutation is a lighter and more convenient state manager designed for react applications. It aims to replace the Redux in react applications and solve the problems of too large Redux and difficult state maintenance and management in the project.
+react-context-mutation is a lighter and more convenient state manager designed for react applications. It aims to replace the Redux in react applications and solve the problems of only one Store in Redux and Non Pluggable state maintenance in the project.
 
 
 
@@ -23,42 +23,58 @@ npm install react-context-mutation
 
 ```js
 // App.js
-import reactContextMutation from "react-context-mutation"
-const { AppConsumer, AppProvider } = reactContextMutation
+import { AppConsumer, AppProvider } = from 'react-context-mutation'
+import Header from './header';
 
-// Header
-function Header(props) {
-  const { ctx } = props
-  const { mutation, context, useActions } = ctx
-
-  handleButtonClick() {
-    mutation.setTitle("哈哈")
-  }
-
+export default function App() {
   return (
-    <>
-      <header>
-        {ctx.context.title}
-      </header>
-      <button onClick={handleButtonClick}>点我设置标题为“哈哈”</button>
-    </>
+    <AppProvider>
+      <AppConsumer>
+        {({ context, useActions }) => 
+            <Header context={context} useActions={useActions} />
+            <Layout>
+              <Sider context={context} useActions={useActions} />
+              <Content>
+                <Router />
+              </Content>
+            </Layout>
+          )
+        }
+      </AppConsumer>
+    </AppProvider>
   )
 }
-
-// provider
-<AppProvider>
-// consumer
-  <AppConsumer>
-    {(ctx) => {
-      // ctx contain context mutation useActions
-      return (
-        <Header ctx={ctx}></Header>
-      )
-    }}
-  </AppConsumer>
-</AppProvider>
 ```
+```js
+// ./header/index.js
+import createActions from './actions';
 
+export default function Header(props) {
+  const { context, useActions } = props;
+  const { menu, currentItem } = context.header;
+  const actions = useActions(createActions); // actions is immutable
+
+  const handleMenuChange = useCallback((currentItem) => {
+    actions.changeCurrent(currentItem)
+  }, [actions]); // actions is immutable
+
+  return (
+    <header>
+      <Menu menu={menu} currentItem={currentItem} onMenuChange={handleMenuChange} />
+    </header>
+  )
+}
+```
+```js
+// ./header/actions.js
+export default (mutation, contextRef) => ({
+  changeCurrent(currentItem) {
+    // you can fetch data hear
+    mutation.header(() => ({ currentItem }));
+    // await for fetch has done, mutation the header context value then
+  }
+})
+```
 
 
 
@@ -66,68 +82,51 @@ function Header(props) {
 The provider receives a config attribute and passes it to the consumer component. A provider can have corresponding relationships with multiple consumer components. Multiple providers can also be nested, and the data in the inner layer will cover the data in the outer layer.
 
 ```
-<AppProvider config={/* 某个值 */}>...</AppProvider>
+<AppProvider config={/* initial config inner state */}>...</AppProvider>
 ```
-
-
 
 
 # AppConsumer
-The consumer component can subscribe to the change of context. This component allows you to subscribe to context in functional components.
-
-
+The consumer component can subscribe to the change of context. This component allows you to subscribe to context in functional components. useActions return an immutable collection of actions used to change context value.
 ```
 <AppConsumer>
-  {value => /* 基于 context 值进行渲染*/}
+  {({ context, useActions, mutation }) => /* regular context to use */}
 </.AppConsumer>
 ```
-
-
 
 
 # Context
 Context provides a way to share such values among components without explicitly passing props layer by layer through the component tree, in order to share the data that is "global" to a component tree.
 ```
 <AppConsumer>
-  {(ctx) => {
-    // ctx contain context mutation useActions
-    return (
-      <Header ctx={ctx}></Header>
-    )
+  {({ context }) => // `context` contains the whole tree of state
+    <Header context={context} />
   }}
 </AppConsumer>
 
 function Header(props) {
-  const { ctx } = props
-  const { context } = ctx
+  const { context } = props
+  const { menu } = context.header
 
   return (
     <header>
-      {context.title}
+      <Menu menu={menu} />
     </header>
   )
 }
 
 ```
 
-
-
+# useActions
+useActions is used to obtain the changes of update status in functional components.
+```
+const { useActions } = props
+const action = useAction(createActions)
+```
 
 # Mutation
 Mutation is used to update the status of components.
 ```
-const { mutation } = ctx
-mutation([type](newState))
+const { mutation } = props
+mutation[namespace](reducer)
 ```
-
-
-
-
-# useActions
-Useactions is used to obtain the changes of update status in functional components.
-```
-const { useActions } = ctx
-const action = useAction()
-```
-
-
