@@ -26,8 +26,9 @@
     "email": "cloudflypeng@gmail.com"
   },
   "contributors": [
-    "Shirley Xie",
-    "Cloudfly Peng"
+    "shirley-xie",
+    "Cloudfly Peng",
+    "sunweichao"
   ],
   "keywords": ["react", "reactjs", "context", "mutable", "mutation"],
   "license": "ISC",
