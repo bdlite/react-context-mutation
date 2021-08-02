@@ -19,9 +19,19 @@ npm install react-context-mutation
 
 # Usage
 ```js
-// App.js
-import { AppConsumer, AppProvider } = from 'react-context-mutation'
-import Header from './header';
+// ./App/context.js
+import createAppContext from 'react-context-mutation';
+import state from './state'; // initial state tree
+import configReducer from './config-reducer'; // pre reduce config function
+
+export default createAppContext(state, configReducer)
+```
+```js
+// ./App/index.js
+import AppContext from './context'
+import Header from './Header'
+
+const { AppProvider, AppConsumer } = AppContext
 
 export default function App() {
   return (
@@ -43,7 +53,25 @@ export default function App() {
 }
 ```
 ```js
-// ./header/index.js
+// ./App/state.js
+export default {
+  app: {},
+  header: {},
+  sider: {},
+}
+```
+```js
+// ./App/config-reducer.js
+export default function configReducer({ app = {}, header = {}, sider = {} }) {
+  return (state) => ({
+    app: mergeAppConfig(app, state.app),
+    sider: mergeSiderConfig(sider, state.sider),
+    header: mergeHeaderConfig(header, state.header),
+  })
+}
+```
+```js
+// ./Header/index.js
 import createActions from './actions';
 
 export default function Header(props) {
@@ -63,7 +91,7 @@ export default function Header(props) {
 }
 ```
 ```js
-// ./header/actions.js
+// ./Header/actions.js
 export default (mutation, contextRef) => ({
   changeCurrent(currentItem) {
     // you can fetch data hear
