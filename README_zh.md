@@ -1,17 +1,16 @@
-English | [中文](README_zh.md) 
+[English](README.md) | 中文  
 
 
 
 
-# NOTE
+# 引言
 
-React-context-mutation is a lighter and more convenient state manager designed for react applications. It aims to replace the Redux in react applications and solve the problems of too large Redux and difficult state maintenance and management in the project.
-
-
+react-context-mutation是一个为react应用设计的、更为轻量、便捷的状态管理器，旨在替换react应用内的redux，解决项目中redux过于庞大、状态不易维护管理的问题
 
 
-# Install
 
+
+# 安装
 ```
 npm install react-context-mutation
 ```
@@ -19,7 +18,7 @@ npm install react-context-mutation
 
 
 
-# Usage
+# 使用
 
 ```js
 // App.js
@@ -45,12 +44,12 @@ function Header(props) {
   )
 }
 
-// provider
+// 生产者
 <AppProvider>
-// consumer
+// 消费者
   <AppConsumer>
     {(ctx) => {
-      // ctx contain context mutation useActions
+      // ctx中包含 context mutation useActions
       return (
         <Header ctx={ctx}></Header>
       )
@@ -63,7 +62,7 @@ function Header(props) {
 
 
 # AppProvider
-The provider receives a config attribute and passes it to the consumer component. A provider can have corresponding relationships with multiple consumer components. Multiple providers can also be nested, and the data in the inner layer will cover the data in the outer layer.
+Provider 接收一个 config 属性，传递给消费组件。一个 Provider 可以和多个消费组件有对应关系。多个 Provider 也可以嵌套使用，里层的会覆盖外层的数据。
 
 ```
 <AppProvider config={/* 某个值 */}>...</AppProvider>
@@ -73,7 +72,7 @@ The provider receives a config attribute and passes it to the consumer component
 
 
 # AppConsumer
-The consumer component can subscribe to the change of context. This component allows you to subscribe to context in functional components.
+Consumer可以订阅 context 的变更，此组件可以让你在函数式组件中可以订阅 context
 
 
 ```
@@ -86,7 +85,7 @@ The consumer component can subscribe to the change of context. This component al
 
 
 # Context
-Context provides a way to share such values among components without explicitly passing props layer by layer through the component tree, in order to share the data that is "global" to a component tree.
+Context 提供了一种在组件之间共享此类值的方式，而不必显式地通过组件树的逐层传递 props,为了共享那些对于一个组件树而言是“全局”的数据
 ```
 <AppConsumer>
   {(ctx) => {
@@ -114,7 +113,7 @@ function Header(props) {
 
 
 # Mutation
-Mutation is used to update the status of components.
+Mutation用于组件更新状态
 ```
 const { mutation } = ctx
 mutation([type](newState))
@@ -124,10 +123,8 @@ mutation([type](newState))
 
 
 # useActions
-Useactions is used to obtain the changes of update status in functional components.
+useActions用于函数式组件中获取更新状态的mutations
 ```
 const { useActions } = ctx
 const action = useAction()
 ```
-
-
