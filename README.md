@@ -54,7 +54,7 @@ export default function App() {
 ```
 ```js
 // ./App/state.js
-export default {
+export default { // initial state tree
   app: {},
   header: {},
   sider: {},
@@ -62,7 +62,7 @@ export default {
 ```
 ```js
 // ./App/config-reducer.js
-export default function configReducer({ app = {}, header = {}, sider = {} }) {
+export default function configReducer({ app = {}, header = {}, sider = {} }) { // pre reduce config function
   return (state) => ({
     app: mergeAppConfig(app, state.app),
     sider: mergeSiderConfig(sider, state.sider),
