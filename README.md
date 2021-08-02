@@ -4,14 +4,12 @@ English | [中文](README_zh.md)
 
 
 # NOTE
-
 react-context-mutation is a lighter and more convenient state manager designed for react applications. It aims to replace the Redux in react applications and solve the problems of only one Store in Redux and Non Pluggable state maintenance in the project.
 
 
 
 
 # Install
-
 ```
 npm install react-context-mutation
 ```
@@ -20,7 +18,6 @@ npm install react-context-mutation
 
 
 # Usage
-
 ```js
 // App.js
 import { AppConsumer, AppProvider } = from 'react-context-mutation'
@@ -106,7 +103,7 @@ Context provides a way to share such values among components without explicitly 
 
 function Header(props) {
   const { context } = props
-  const { menu } = context.header
+  const { menu } = context.header // get `header` namespace
 
   return (
     <header>
@@ -114,14 +111,13 @@ function Header(props) {
     </header>
   )
 }
-
 ```
 
 # useActions
-useActions is used to obtain the changes of update status in functional components.
+useActions is used to obtain the changes of update status in functional components. Accept a closure funtion that provide `mutation` and `contextRef`.
 ```
 const { useActions } = props
-const action = useAction(createActions)
+const actions = useAction(createActions)
 ```
 
 # Mutation
