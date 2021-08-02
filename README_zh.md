@@ -54,6 +54,25 @@ export default function App() {
   )
 }
 ```
+```js
+// ./App/state.js
+export default { // 默认初始state树
+  app: {},
+  header: {},
+  sider: {},
+}
+```
+
+```js
+// ./App/config-reducer.js
+export default function configReducer({ app = {}, header = {}, sider = {} }) { // 预置config合并函数
+  return (state) => ({
+    app: mergeAppConfig(app, state.app),
+    sider: mergeSiderConfig(sider, state.sider),
+    header: mergeHeaderConfig(header, state.header),
+  })
+}
+```
 
 ```js
 // ./Header/index.js
