@@ -110,7 +110,7 @@ export default (mutation, contextRef) => ({ // 从闭包获取`mutation`和`cont
 
 # AppProvider
 
-Provider 接收一个 config 属性，传递给消费组件。一个 Provider 可以和多个消费组件有对应关系。多个 Provider 也可以嵌套使用，里层的会覆盖外层的数据。
+Provider 接收一个 config 属性，用以在可复用业务框架的基础上进行定制化配置。
 
 这里有一些对业务常用的抽象设计，需要一些篇幅展开介绍，后续文档会加上，请期待...
 
