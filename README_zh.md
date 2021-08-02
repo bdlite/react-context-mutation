@@ -78,7 +78,7 @@ export default function Header(props) {
 
 ```js
 // ./Header/actions.js
-export default (mutation, contextRef) => ({
+export default (mutation, contextRef) => ({ // 从闭包获取`mutation`和`contextRef`
   changeCurrent(currentItem) {
     // 你可以在这里请求数据，异步处理context值
     mutation.header(() => ({ currentItem }));
