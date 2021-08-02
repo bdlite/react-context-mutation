@@ -22,8 +22,8 @@
     "src/*.js": "eslint"
   },
   "author": {
-    "name": "cloudfly",
-    "email": "cloudflypeng@gmail.com"
+    "name": "shirley-xie",
+    "email": "yexinxie@163.com"
   },
   "contributors": [
     "shirley-xie",
