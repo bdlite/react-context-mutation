@@ -1,6 +1,6 @@
 {
   "name": "react-context-mutation",
-  "version": "0.0.9-Alpha",
+  "version": "0.1.0-Alpha",
   "description": "to replace redux,Provider value contain useActions which is to merge context state value and useActions return an immutable function collection called `actions`",
   "main": "es/index.js",
   "scripts": {
