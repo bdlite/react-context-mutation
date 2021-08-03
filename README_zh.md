@@ -39,7 +39,8 @@ export default function App() {
   return (
     <AppProvider> // 生产者
       <AppConsumer> // 消费者
-        {({ context, useActions }) => 
+        {({ context, useActions }) => (
+          <Layout>
             <Header context={context} useActions={useActions} />
             <Layout>
               <Sider context={context} useActions={useActions} />
@@ -47,8 +48,8 @@ export default function App() {
                 <Router />
               </Content>
             </Layout>
-          )
-        }
+          </Layout>
+        )}
       </AppConsumer>
     </AppProvider>
   )
