@@ -108,6 +108,16 @@ export default (mutation, contextRef) => ({ // 从闭包获取`mutation`和`cont
 
 
 
+# createAppContext `export`
+
+默认导出的是一个工厂函数，接收初始 `state` 树和定制化配置的 `reducer` 预置函数,
+返回 `<AppProvider>` 和 `<AppConsumer>`
+
+```
+createAppContext(state, [configReducer])
+```
+
+
 # AppProvider
 
 Provider 接收一个 config 属性，用以在可复用业务框架的基础上进行定制化配置。
