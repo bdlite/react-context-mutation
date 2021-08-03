@@ -1,6 +1,6 @@
 {
   "name": "react-context-mutation",
-  "version": "0.0.9",
+  "version": "0.0.9-Alpha",
   "description": "to replace redux,Provider value contain useActions which is to merge context state value and useActions return an immutable function collection called `actions`",
   "main": "es/index.js",
   "scripts": {
@@ -22,12 +22,12 @@
     "src/*.js": "eslint"
   },
   "author": {
-    "name": "shirley-xie",
-    "email": "yexinxie@163.com"
+    "name": "cloudfly",
+    "email": "cloudflypeng@gmail.com"
   },
   "contributors": [
     "shirley-xie",
-    "Cloudfly Peng",
+    "cloudfly",
     "sunweichao"
   ],
   "keywords": ["react", "reactjs", "context", "mutable", "mutation"],
