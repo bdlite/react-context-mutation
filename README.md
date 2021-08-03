@@ -38,6 +38,7 @@ export default function App() {
     <AppProvider>
       <AppConsumer>
         {({ context, useActions }) => (
+          <Layout>
             <Header context={context} useActions={useActions} />
             <Layout>
               <Sider context={context} useActions={useActions} />
@@ -45,8 +46,8 @@ export default function App() {
                 <Router />
               </Content>
             </Layout>
-          )
-        }
+          </Layout>
+        )}
       </AppConsumer>
     </AppProvider>
   )
