@@ -103,6 +103,15 @@ export default (mutation, contextRef) => ({ // `mutation`and`contextRef` from cl
 
 
 
+# createAppContext `export`
+
+export default is a factory function, receive `state` tree and a predicted `reducer` function, return `<AppProvider>` and `<AppConsumer>`.
+
+```
+createAppContext(state, [configReducer])
+```
+
+
 # AppProvider
 The provider receives a config attribute and make the custom config merge to the abstraction of business framework.
 
