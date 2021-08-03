@@ -37,7 +37,7 @@ export default function App() {
   return (
     <AppProvider>
       <AppConsumer>
-        {({ context, useActions }) => 
+        {({ context, useActions }) => (
             <Header context={context} useActions={useActions} />
             <Layout>
               <Sider context={context} useActions={useActions} />
