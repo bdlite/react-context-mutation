@@ -108,7 +108,7 @@ export default (mutation, contextRef) => ({ // `mutation`and`contextRef` from cl
 export default is a factory function, receive `state` tree and a predicted `reducer` function, return `<AppProvider>` and `<AppConsumer>`.
 
 ```
-createAppContext(state, [configReducer])
+createAppContext(state[, configReducer])
 ```
 
 
