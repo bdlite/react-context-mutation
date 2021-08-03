@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { isEmpty, isPlainObject, isFunction } from 'lodash';
+import { isPlainObject, isFunction } from 'lodash';
 
 
-const InitailProxyActions = () => proxyActions({});
+const InitialProxyActions = () => proxyActions({});
 
 function proxyActions(actions) {
   return new Proxy(actions, {
@@ -23,21 +23,21 @@ export default function createContext(state, reducer) {
   const mutate = getMutateByNamespaces(namespaces);
   const configReducer = isFunction(reducer) ? reducer : () => InitialState;
   const InitialMutation = namespaces.reduce((mutation, type) => Object.assign(mutation, { [type]: () => InitialState }), {});
-  const InitialContext = { context: InitialState, mutation: InitialMutation, useActions: InitailProxyActions };
-  const AppContext = React.createContext(InitialContext);
+  const InitialContextData = { context: InitialState, mutation: InitialMutation, useActions: InitialProxyActions };
+  const AppContext = React.createContext(InitialContextData);
 
   function AppProvider(props) {
-    const { config, children } = props;
+    const { config = {}, children } = props;
   
     const actionsRef = useRef(null); // 让useActions不可变
     const stateRef = useRef(InitialState);  // 给actions的闭包用
     const [isInit, setIsInit] = useState(false);
-    const [contextData, setContextData] = useState(InitialContext);
+    const [contextData, setContextData] = useState(InitialContextData);
   
     useEffect(() => {
-      if (isInit || isEmpty(config)) return;
+      if (isInit) return;
   
-      const context = configReducer(config)(stateRef.current);
+      const context = configReducer(config)(stateRef.current); // TODO: catch 异常并给出来自包的提示
   
       stateRef.current = context;
   
