@@ -30,7 +30,7 @@
     "cloudfly",
     "sunweichao"
   ],
-  "keywords": ["react", "reactjs", "context", "mutable", "mutation"],
+  "keywords": ["react", "reactjs", "context", "mutable", "mutation", "immutable", "hooks", "hook"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/bdlite/react-context-mutation/issues"
