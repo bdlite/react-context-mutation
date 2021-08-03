@@ -114,7 +114,7 @@ export default (mutation, contextRef) => ({ // 从闭包获取`mutation`和`cont
 返回 `<AppProvider>` 和 `<AppConsumer>`
 
 ```
-createAppContext(state, [configReducer])
+createAppContext(state[, configReducer])
 ```
 
 
