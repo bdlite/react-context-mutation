@@ -139,7 +139,7 @@ Consumer可以订阅 context 的变更，此组件可以让你在函数式组件
 ```
 <AppConsumer>
   {({ context, useActions, mutation }) => /* 普通的 context 可供使用 */}
-</.AppConsumer>
+</AppConsumer>
 ```
 
 
