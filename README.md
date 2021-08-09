@@ -126,7 +126,7 @@ The consumer component can subscribe to the change of context. This component al
 ```
 <AppConsumer>
   {({ context, useActions, mutation }) => /* regular context to use */}
-</.AppConsumer>
+</AppConsumer>
 ```
 
 
