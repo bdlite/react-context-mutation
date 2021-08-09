@@ -34,11 +34,14 @@
     "react",
     "reactjs",
     "context",
+    "mutate",
     "mutable",
     "mutation",
     "immutable",
     "hooks",
-    "hook"
+    "hook",
+    "action",
+    "actions",
   ],
   "license": "ISC",
   "bugs": {
