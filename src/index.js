@@ -7,7 +7,7 @@ const InitialProxyActions = () => proxyActions({});
 function proxyActions(actions) {
   return new Proxy(actions, {
     get(trapTarget, key, receiver) {
-      if (!(key in receiver)) Reflect.set(trapTarget, key, () => {}, receiver) // TODO: 抛出提示
+      if (!(key in receiver)) Reflect.set(trapTarget, key, () => { }, receiver) // TODO: 抛出提示
       return Reflect.get(trapTarget, key, receiver)
     }
   })
@@ -28,21 +28,21 @@ export default function createContext(state, reducer) {
 
   function AppProvider(props) {
     const { config = {}, children } = props;
-  
-    const actionsRef = useRef(null); // 让useActions不可变
+
+    const actionsRef = useRef({}); // 让useActions不可变
     const stateRef = useRef(InitialState);  // 给actions的闭包用
     const [isInit, setIsInit] = useState(false);
     const [contextData, setContextData] = useState(InitialContextData);
-  
+
     useEffect(() => {
       if (isInit) return;
-  
+
       const context = configReducer(config)(stateRef.current); // TODO: catch 异常并给出来自包的提示
-  
+
       stateRef.current = context;
-  
+
       setContextData(({ mutation: curMutation, useActions: curUseActions }) => {
-  
+
         const mutation = reduceMutation(curMutation, (type) =>
           (payload, isSetState) => isFunction(payload) && setContextData(curContextData => {
             const nextContext = mutate({ type, payload }, stateRef.current, { isSetState });
@@ -50,19 +50,24 @@ export default function createContext(state, reducer) {
             return { ...curContextData, context: nextContext }
           })
         );
-  
-        const useActions = (getActions) => {
-          if (actionsRef.current) return actionsRef.current
-          return actionsRef.current = isFunction(getActions) ? proxyActions(getActions(mutation, stateRef)) : curUseActions
+
+        const useActions = (namespace, createActions) => {
+          if (actionsRef.current[namespace]) return actionsRef.current[namespace]
+          actionsRef.current = Object.assign(
+            {},
+            actionsRef.current,
+            { [namespace]: isFunction(createActions) ? proxyActions(createActions(mutation, stateRef)) : curUseActions }
+          )
+          return actionsRef.current[namespace]
         };
-  
+
         return { context, mutation, useActions }
-  
+
       });
-  
+
       setIsInit(true);
     }, [isInit, config, stateRef, actionsRef]);
-  
+
     return <AppContext.Provider value={contextData}>{children}</AppContext.Provider>
   }
 
