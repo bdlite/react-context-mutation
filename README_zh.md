@@ -82,7 +82,7 @@ import createActions from './actions';
 export default function Header(props) {
   const { context, useActions } = props;
   const { menu, currentItem } = context.header;
-  const actions = useActions(createActions); // actions 是不可变的
+  const actions = useActions('header', createActions); // `header` 是命名空间, actions 是不可变的
 
   const handleMenuChange = useCallback((currentItem) => {
     actions.changeCurrent(currentItem)
@@ -168,13 +168,13 @@ function Header(props) {
 
 # useActions
 
-useActions用于获取actions集合的hook，接收一个闭包环境的函数，提供`mutation`函数和`contextRef`对象。
+useActions用于获取actions集合的hook，接收一个命名空间字符串和一个闭包环境的函数，闭包提供`mutation`函数和`contextRef`对象。
 
 文档后续会展开介绍具体用法和设计初衷...
 
 ```
 const { useActions } = props
-const actions = useAction(createActions)
+const actions = useAction(namespace, createActions)
 ```
 
 # Mutation
