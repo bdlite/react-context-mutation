@@ -78,7 +78,7 @@ import createActions from './actions';
 export default function Header(props) {
   const { context, useActions } = props;
   const { menu, currentItem } = context.header;
-  const actions = useActions(createActions); // actions is immutable
+  const actions = useActions('header', createActions); // `header` is namespace, actions is immutable
 
   const handleMenuChange = useCallback((currentItem) => {
     actions.changeCurrent(currentItem)
@@ -152,10 +152,10 @@ function Header(props) {
 ```
 
 # useActions
-useActions is used to obtain the changes of update status in functional components. Accept a closure funtion that provide `mutation` and `contextRef`.
+useActions is used to obtain the changes of update status in functional components. Accept a key of namespace and a closure funtion that provide `mutation` and `contextRef`.
 ```
 const { useActions } = props
-const actions = useAction(createActions)
+const actions = useAction(namespace, createActions)
 ```
 
 # Mutation
