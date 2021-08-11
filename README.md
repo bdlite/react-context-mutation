@@ -155,7 +155,7 @@ function Header(props) {
 useActions is used to obtain the changes of update status in functional components. Accept a key of namespace and a closure funtion that provide `mutation` and `contextRef`.
 ```
 const { useActions } = props
-const actions = useAction(namespace, createActions)
+const actions = useActions(namespace, createActions)
 ```
 
 # Mutation
