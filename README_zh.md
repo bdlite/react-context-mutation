@@ -174,7 +174,7 @@ useActions用于获取actions集合的hook，接收一个命名空间字符串�
 
 ```
 const { useActions } = props
-const actions = useAction(namespace, createActions)
+const actions = useActions(namespace, createActions)
 ```
 
 # Mutation
