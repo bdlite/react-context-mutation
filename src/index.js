@@ -84,8 +84,11 @@ function getMutateByNamespaces(namespaces) {
     const namespace = namespaces.find(name => name === type);
 
     if (!namespace) return state;
-
-    return Object.assign({}, state, { [type]: isSetState ? setState(payload, state[type]) : mergeState(payload, state[type]) });
+    const newState = Object.assign({}, state, { [type]: isSetState ? setState(payload, state[type]) : mergeState(payload, state[type]) });
+    if (window.__BDLITE_DEVTOOLS_GLOBAL_HOOK__) {
+      window.__BDLITE_DEVTOOLS_GLOBAL_HOOK__.emit('context_change', {data: newState})
+    }
+    return newState
   }
 }
 
